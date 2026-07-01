@@ -85,12 +85,10 @@ def main(screen):
         elif key == curses.KEY_UP:
             count = 0
             if cursor > 0:
-                # Move the cursor to the beginning of the current line
                 while cursor > 0 and text[cursor - 1] != "\n":
                     cursor -= 1
                     count += 1
                 if cursor != 0:
-                    # Move the cursor to the beginning of the previous line
                     if cursor > 0:
                         cursor -= 1
                         while cursor > 0 and text[cursor - 1] != "\n":
@@ -103,16 +101,15 @@ def main(screen):
         elif key == curses.KEY_DOWN:
             count = 1
             if cursor > 0:
-                # Move the cursor to the beginning of the current line
                 while cursor > 0 and text[cursor - 1] != "\n":
                     cursor -= 1
                     count += 1
-            if cursor < len(text):
-                # Move the cursor to the end of the current line
-                while cursor < len(text) - 1 and text[cursor] != "\n":
-                    cursor += 1
-                for i in range(count):
-                    if cursor < len(text):
+            while cursor < len(text) and text[cursor] != "\n":
+                cursor += 1
+            cursor += 1
+            if text[cursor] != "\n":
+                for i in range(count-1):
+                    if cursor < len(text) and text[cursor] != "\n":
                         cursor += 1
 
 
